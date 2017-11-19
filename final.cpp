@@ -31,8 +31,18 @@ int main(int argc, char *argv[])
 		("directory,d", po::value<std::string>(&documentRoot), "document root directory");
 
 	po::variables_map vm;
-	po::store(po::parse_command_line(argc, argv, desc), vm);
-	po::notify(vm);
+	
+	try
+	{
+		po::store(po::parse_command_line(argc, argv, desc), vm);
+		po::notify(vm);
+	}
+	catch( const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		std::cout << desc << std::endl;
+		return 1;
+	}
 
 	if(vm.count("help"))
 	{
@@ -43,18 +53,21 @@ int main(int argc, char *argv[])
 	if( !vm.count("host") )
 	{
 		std::cerr << "Host IP address was not specified" << std::endl;
+		std::cout << desc << std::endl;
 		return 1;
 	}
 
 	if( !vm.count("port") )
 	{
 		std::cerr << "Port number was not specified" << std::endl;
+		std::cout << desc << std::endl;
 		return 1;
 	}
 
 	if( !vm.count("directory") )
 	{
 		std::cerr << "Document root directory was not specified" << std::endl;
+		std::cout << desc << std::endl;
 		return 1;
 	}
 
