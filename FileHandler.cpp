@@ -96,6 +96,11 @@ bool FileHandler::decodeUrl(const std::string& in, std::string& out)
 		{
 			out += ' ';
 		}
+		else if( in[i] == '?' )
+		{
+			// ignore the URI parameters
+			break;
+		}
 		else
 		{
 			out += in[i];

@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 	std::string port;
 	std::string documentRoot;
 
+	// Use boost::program_options is much better than getopt() :)
 	// Declare the supported options
 	po::options_description desc("Allowed options");
 	desc.add_options()
